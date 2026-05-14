@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA PLATA 12 | Promoción Residencial Premium - Viguera, La Rioja</title>
+    <meta name="description" content="8 residencias exclusivas en Viguera, Sierra de Cameros. Planos oficiales, memoria de calidades y entorno natural privilegiado.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-dark: #0f1115;
+            --color-gold: #b8956a;
+            --color-gold-light: #d4b896;
+            --color-cream: #f7f5f2;
+            --color-stone: #e8e4df;
+            --color-text: #2a2a2a;
+            --color-text-light: #6b6b6b;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --spacing-section: 120px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-text);
+            background: var(--color-cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVEGACIÓN LATERAL PREMIUM */
+        .side-nav {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 24px;
+        }
+        .side-nav::before {
+            content: '';
+            position: absolute;
+            right: 5px;
+            top: 10px;
+            bottom: 10px;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--color-gold), transparent);
+        }
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: transparent;
+            border: 2px solid var(--color-gold);
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+        .nav-dot:hover, .nav-dot.active {
+            background: var(--color-gold);
+            transform: scale(1.2);
+        }
+        .nav-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--color-dark);
+            color: var(--color-gold);
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            border-radius: 4px;
+        }
+        .nav-dot:hover::after { opacity: 1; right: 30px; }
+
+        /* TIPOGRAFÍA & UTILIDADES */
+        h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--color-dark);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: var(--color-gold);
+            margin: 15px auto 0;
+        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* PORTADA */
+        .cover {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(15,17,21,0.4), rgba(15,17,21,0.6)),
+                        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            position: relative;
+        }
+        .cover-content { position: relative; z-index: 2; max-width: 900px; padding: 0 20px; }
+        .cover h1 {
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        .cover .subtitle {
+            font-family: var(--font-sans);
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            color: var(--color-gold-light);
+        }
+        .cover .tagline {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); } 50% { opacity: 1; transform: translateX(-50%) translateY(-5px); } }
+
+        /* INTRO EDITORIAL */
+        .intro {
+            padding: var(--spacing-section) 0;
+            text-align: center;
+            background: var(--color-cream);
+        }
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--color-text-light);
+        }
+        .intro-text strong { color: var(--color-dark); font-weight: 500; }
+        .director-sign {
+            margin-top: 40px;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--color-dark);
+        }
+
+        /* ENTORNO & UBICACIÓN */
+        .nature {
+            padding: var(--spacing-section) 0;
+            background: var(--color-dark);
+            color: white;
+        }
+        .nature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .nature-card {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .nature-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .nature-card:hover img { transform: scale(1.05); }
+        .nature-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+        .nature-overlay h3 { font-size: 1.5rem; margin-bottom: 5px; color: var(--color-gold-light); }
+        .nature-overlay p { font-size: 0.9rem; opacity: 0.8; }
+
+        /* PLANOS & SUPERFICIES */
+        .plans {
+            padding: var(--spacing-section) 0;
+            background: white;
+        }
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        .plan-card {
+            background: var(--color-cream);
+            border: 1px solid var(--color-stone);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .plan-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.08); transform: translateY(-5px); }
+        .plan-header {
+            background: var(--color-dark);
+            color: white;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .plan-header h3 { font-size: 1.3rem; margin: 0; }
+        .plan-badge {
+            background: var(--color-gold);
+            color: var(--color-dark);
+            padding: 5px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 20px;
+        }
+        .plan-image {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid var(--color-stone);
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .plan-image img { max-width: 100%; height: auto; max-height: 200px; object-fit: contain; }
+        .plan-specs { padding: 25px; }
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .spec-item { background: white; padding: 15px; border-radius: 4px; border-left: 3px solid var(--color-gold); }
+        .spec-label { font-size: 0.75rem; text-transform: uppercase; color: var(--color-text-light); letter-spacing: 0.5px; }
+        .spec-value { font-size: 1.1rem; font-weight: 600; color: var(--color-dark); margin-top: 4px; }
+        .plan-distribution { margin-top: 15px; }
+        .plan-distribution ul { list-style: none; font-size: 0.9rem; color: var(--color-text-light); }
+        .plan-distribution li { padding: 6px 0; border-bottom: 1px dashed var(--color-stone); display: flex; justify-content: space-between; }
+        .plan-distribution li:last-child { border-bottom: none; }
+
+        /* CALIDADES (MEMORIA REAL) */
+        .qualities {
+            padding: var(--spacing-section) 0;
+            background: var(--color-stone);
+        }
+        .qualities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .quality-item {
+            background: white;
+            padding: 30px;
+            border-radius: 6px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .quality-item:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+        .quality-icon { font-size: 2rem; margin-bottom: 15px; color: var(--color-gold); }
+        .quality-title { font-family: var(--font-sans); font-weight: 600; font-size: 1rem; margin-bottom: 8px; color: var(--color-dark); }
+        .quality-desc { font-size: 0.85rem; color: var(--color-text-light); line-height: 1.5; }
+
+        /* CTAs & CONTACTO */
+        .contact {
+            padding: var(--spacing-section) 0;
+            background: var(--color-dark);
+            color: white;
+            text-align: center;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 40px auto 0;
+        }
+        .cta-btn {
+            display: block;
+            padding: 20px;
+            background: transparent;
+            border: 1px solid var(--color-gold);
+            color: var(--color-gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        .cta-btn:hover { background: var(--color-gold); color: var(--color-dark); }
+        .cta-btn.primary { background: var(--color-gold); color: var(--color-dark); }
+        .cta-btn.primary:hover { background: var(--color-gold-light); border-color: var(--color-gold-light); }
+
+        /* CONTRAPORTADA */
+        .back-cover {
+            padding: 80px 0;
+            background: var(--color-cream);
+            text-align: center;
+            border-top: 1px solid var(--color-stone);
+        }
+        .brand-name { font-family: var(--font-serif); font-size: 2rem; color: var(--color-dark); margin-bottom: 10px; }
+        .brand-tagline { color: var(--color-text-light); font-size: 0.9rem; margin-bottom: 30px; }
+        .final-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--color-dark);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.5;
+        }
+        .credits { font-size: 0.8rem; color: var(--color-text-light); margin-top: 40px; line-height: 1.8; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            :root { --spacing-section: 80px; }
+            .side-nav { right: 20px; }
+            .nav-dot::after { display: none; }
+            .container { padding: 0 20px; }
+            .plans-grid { grid-template-columns: 1fr; }
+            .specs-grid { grid-template-columns: 1fr; }
+        }
+
+        /* PRINT OPTIMIZATION */
+        @media print {
+            .side-nav, .scroll-hint, .cta-btn { display: none !important; }
+            body { background: white; color: black; }
+            .cover { height: auto; padding: 100px 0; background: white !important; color: black; }
+            .cover h1 { color: black; }
+            .nature, .contact { background: white !important; color: black; }
+            .plan-card, .quality-item { break-inside: avoid; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVEGACIÓN LATERAL -->
+    <nav class="side-nav">
+        <div class="nav-dot active" data-label="Inicio" onclick="scrollToSection(0)"></div>
+        <div class="nav-dot" data-label="Concepto" onclick="scrollToSection(1)"></div>
+        <div class="nav-dot" data-label="Entorno" onclick="scrollToSection(2)"></div>
+        <div class="nav-dot" data-label="Planos" onclick="scrollToSection(3)"></div>
+        <div class="nav-dot" data-label="Calidades" onclick="scrollToSection(4)"></div>
+        <div class="nav-dot" data-label="Contacto" onclick="scrollToSection(5)"></div>
+    </nav>
+
+    <!-- PORTADA -->
+    <header class="cover" id="section-0">
+        <div class="cover-content">
+            <h1>LA PLATA 12</h1>
+            <p class="subtitle">8 Residencias · Viguera, La Rioja</p>
+            <p class="tagline">Donde la Sierra de Cameros se hace hogar. Tranquilidad, luz y calidad constructiva.</p>
+        </div>
+        <div class="scroll-hint">↓</div>
+    </header>
+
+    <!-- INTRO EDITORIAL -->
+    <section class="intro" id="section-1">
+        <div class="container">
+            <h2 class="section-title reveal">Concepto</h2>
+            <div class="intro-text reveal">
+                <p>Menos ruido. Más luz. Un refugio diseñado para quienes valoran la tranquilidad sin renunciar a la calidad.</p>
+                <p style="margin-top: 20px;"><strong>La Plata 12</strong> integra arquitectura cuidada, materiales nobles y un entorno natural privilegiado. Obra nueva, distribución optimizada y eficiencia energética como estándar.</p>
+            </div>
+            <div class="director-sign reveal">
+                "Construimos hogares, creamos sueños, entregamos calidad."<br>
+                <span style="font-size: 0.9rem; color: var(--color-text-light);">Maribel de la · Dirección Editorial</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENTORNO & UBICACIÓN -->
+    <section class="nature" id="section-2">
+        <div class="container">
+            <h2 class="section-title reveal" style="color: white; border-color: var(--color-gold);">Entorno Privilegiado</h2>
+            <div class="nature-grid reveal">
+                <div class="nature-card">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Sierra de Cameros">
+                    <div class="nature-overlay">
+                        <h3>Sierra de Cameros</h3>
+                        <p>Parque Natural, bosques milenarios y aire puro.</p>
+                    </div>
+                </div>
+                <div class="nature-card">
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80" alt="Peñas de Viguera">
+                    <div class="nature-overlay">
+                        <h3>Peñas de Viguera</h3>
+                        <p>Formaciones geológicas únicas y rutas de senderismo.</p>
+                    </div>
+                </div>
+                <div class="nature-card">
+                    <img src="https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=800&q=80" alt="Río Iregua">
+                    <div class="nature-overlay">
+                        <h3>Río Iregua</h3>
+                        <p>Paisajes de valle, pesca y tranquilidad absoluta.</p>
+                    </div>
+                </div>
+                <div class="nature-card" style="background: var(--color-gold); display: flex; align-items: center; justify-content: center; padding: 40px;">
+                    <div style="text-align: center;">
+                        <h3 style="font-size: 2.5rem; margin-bottom: 10px; color: var(--color-dark);">22 min</h3>
+                        <p style="color: var(--color-dark); font-weight: 500;">de Logroño</p>
+                        <p style="color: var(--color-dark); opacity: 0.8; margin-top: 10px;">Conectividad perfecta · Servicios cercanos · Naturaleza inmediata</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLANOS & SUPERFICIES -->
+    <section class="plans" id="section-3">
+        <div class="container">
+            <h2 class="section-title reveal">Planos & Distribución</h2>
+            <p style="text-align: center; max-width: 700px; margin: -40px auto 60px; color: var(--color-text-light);" class="reveal">
+                Documentación técnica oficial. Superficies reales, orientación estudiada y espacios optimizados para el confort diario.
+            </p>
+
+            <div class="plans-grid">
+                <!-- VIVIENDA 05 -->
+                <article class="plan-card reveal">
+                    <div class="plan-header">
+                        <h3>Vivienda 05</h3>
+                        <span class="plan-badge">Planta 2º · Puerta A</span>
+                    </div>
+                    <div class="plan-image">
+                        <!-- Espacio reservado para plano oficial. En producción, insertar <img> -->
+                        <div style="color: var(--color-text-light); font-style: italic;">[ Plano Oficial Vivienda 05 ]</div>
+                    </div>
+                    <div class="plan-specs">
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <div class="spec-label">Útil Total</div>
+                                <div class="spec-value">35,30 m²</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Construida Total</div>
+                                <div class="spec-value">42,25 m²</div>
+                            </div>
+                        </div>
+                        <div class="plan-distribution">
+                            <ul>
+                                <li><span>Salón-Comedor-Cocina</span> <span>16,05 m²</span></li>
+                                <li><span>Dormitorio</span> <span>10,30 m²</span></li>
+                                <li><span>Baño</span> <span>3,90 m²</span></li>
+                                <li><span>Distribuidor</span> <span>1,05 m²</span></li>
+                                <li><span>2 Balcones</span> <span>1,00 m² c/u</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- VIVIENDA 06 -->
+                <article class="plan-card reveal">
+                    <div class="plan-header" style="background: var(--color-gold); color: var(--color-dark);">
+                        <h3>Vivienda 06</h3>
+                        <span class="plan-badge" style="background: var(--color-dark); color: white;">Disponibilidad Inmediata</span>
+                    </div>
+                    <div class="plan-image">
+                        <div style="color: var(--color-text-light); font-style: italic;">[ Plano Oficial Vivienda 06 ]</div>
+                    </div>
+                    <div class="plan-specs">
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <div class="spec-label">Útil Total</div>
+                                <div class="spec-value">34,90 m²</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Construida Total</div>
+                                <div class="spec-value">43,30 m²</div>
+                            </div>
+                        </div>
+                        <div class="plan-distribution">
+                            <ul>
+                                <li><span>Salón-Comedor-Cocina</span> <span>18,65 m²</span></li>
+                                <li><span>Dormitorio</span> <span>10,00 m²</span></li>
+                                <li><span>Baño</span> <span>4,35 m²</span></li>
+                                <li><span>Distribuidor</span> <span>1,10 m²</span></li>
+                                <li><span>Balcón</span> <span>1,00 m²</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- VIVIENDA 07 -->
+                <article class="plan-card reveal">
+                    <div class="plan-header">
+                        <h3>Vivienda 07</h3>
+                        <span class="plan-badge">Ático Dúplex · Puerta A</span>
+                    </div>
+                    <div class="plan-image">
+                        <div style="color: var(--color-text-light); font-style: italic;">[ Plano Oficial Dúplex 07 ]</div>
+                    </div>
+                    <div class="plan-specs">
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <div class="spec-label">Superficie Total</div>
+                                <div class="spec-value">91,55 m²</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Tipología</div>
+                                <div class="spec-value">Dúplex</div>
+                            </div>
+                        </div>
+                        <div class="plan-distribution">
+                            <ul>
+                                <li><span>Doble altura y distribución en 2 plantas</span></li>
+                                <li><span>Vistas panorámicas 360º</span></li>
+                                <li><span>Terraza privada amplia</span></li>
+                                <li><span>Máxima luminosidad y privacidad</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- VIVIENDA 08 -->
+                <article class="plan-card reveal">
+                    <div class="plan-header">
+                        <h3>Vivienda 08</h3>
+                        <span class="plan-badge">Ático Dúplex · Puerta B</span>
+                    </div>
+                    <div class="plan-image">
+                        <div style="color: var(--color-text-light); font-style: italic;">[ Plano Oficial Dúplex 08 ]</div>
+                    </div>
+                    <div class="plan-specs">
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <div class="spec-label">Superficie Total</div>
+                                <div class="spec-value">84,95 m²</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Tipología</div>
+                                <div class="spec-value">Dúplex</div>
+                            </div>
+                        </div>
+                        <div class="plan-distribution">
+                            <ul>
+                                <li><span>Doble altura y distribución en 2 plantas</span></li>
+                                <li><span>Orientación privilegiada Sierra</span></li>
+                                <li><span>Terraza privada</span></li>
+                                <li><span>Acabados premium integrados</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALIDADES (MEMORIA REAL) -->
+    <section class="qualities" id="section-4">
+        <div class="container">
+            <h2 class="section-title reveal">Memoria de Calidades</h2>
+            <div class="qualities-grid">
+                <div class="quality-item reveal">
+                    <div class="quality-icon"></div>
+                    <div class="quality-title">Carpintería Exterior RPT</div>
+                    <div class="quality-desc">Aluminio lacado con rotura de puente térmico y vidrios bajoemisivos. Eficiencia y confort garantizados.</div>
+                </div>
+                <div class="quality-item reveal">
+                    <div class="quality-icon"></div>
+                    <div class="quality-title">Aislamiento Térmico/Acústico</div>
+                    <div class="quality-desc">Tabiquería cerámica doble hoja y aislamiento intermedio superior a normativa vigente.</div>
+                </div>
+                <div class="quality-item reveal">
+                    <div class="quality-icon"></div>
+                    <div class="quality-title">Gres Porcelánico</div>
+                    <div class="quality-desc">Solado imitación piedra natural en toda la vivienda, incluida cocina y baños. Alta resistencia y estética unificada.</div>
+                </div>
+                <div class="quality-item reveal">
+                    <div class="quality-icon">🚪</div>
+                    <div class="quality-title">Puertas Madera Castaño</div>
+                    <div class="quality-desc">Carpintería interior en madera noble con acabado natural. Robustez y calidez en cada estancia.</div>
+                </div>
+                <div class="quality-item reveal">
+                    <div class="quality-icon">️</div>
+                    <div class="quality-title">Ventilación Mecánica</div>
+                    <div class="quality-desc">Sistema de ventilación mecánica controlada con recuperador de calor. Aire renovado y eficiencia energética.</div>
+                </div>
+                <div class="quality-item reveal">
+                    <div class="quality-icon">☀️</div>
+                    <div class="quality-title">Termosolar (ACS)</div>
+                    <div class="quality-desc">Agua caliente sanitaria mediante acumulación con aporte de placas termosolares en cubierta. Ahorro real.</div>
+                </div>
+                <div class="quality-item reveal">
+                    <div class="quality-icon"></div>
+                    <div class="quality-title">Ascensor</div>
+                    <div class="quality-desc">Acceso vertical cómodo y accesible. Portal con pavimento porcelánico y acabados de calidad.</div>
+                </div>
+                <div class="quality-item reveal">
+                    <div class="quality-icon">📹</div>
+                    <div class="quality-title">Videoportero</div>
+                    <div class="quality-desc">Control de acceso visual y sonoro en cada vivienda. Seguridad y tranquilidad desde el primer día.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTAs & CONTACTO -->
+    <section class="contact" id="section-5">
+        <div class="container">
+            <h2 class="section-title reveal" style="color: white; border-color: var(--color-gold);">Próximos Pasos</h2>
+            <p style="max-width: 600px; margin: 0 auto 40px; opacity: 0.8;" class="reveal">
+                Sin compromiso. Accede a la documentación técnica, agenda una visita o consulta disponibilidad actualizada.
+            </p>
+            <div class="contact-grid reveal">
+                <a href="mailto:info@adolmainversiones.es?subject=Solicitar%20Visita%20La%20Plata%2012" class="cta-btn primary">Agendar Visita</a>
+                <a href="mailto:info@adolmainversiones.es?subject=Memoria%20de%20Calidades%20La%20Plata%2012" class="cta-btn">Descargar Memoria</a>
+                <a href="mailto:info@adolmainversiones.es?subject=Consultar%20Disponibilidad%20La%20Plata%2012" class="cta-btn">Disponibilidad</a>
+                <a href="mailto:info@adolmainversiones.es?subject=Financiación%20La%20Plata%2012" class="cta-btn">Financiación</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTRAPORTADA -->
+    <footer class="back-cover">
+        <div class="container">
+            <div class="brand-name reveal">ADOLMA INVERSIÓN, S.L.</div>
+            <div class="brand-tagline reveal">Construyendo sueños, creando hogares.</div>
+            <div class="final-quote reveal">
+                "Tu llave a la tranquilidad. Naturaleza, historia y calidad de vida en un solo lugar."
+            </div>
+            <div class="credits reveal">
+                Promueve: Adolma Inversión, S.L. · Construye: HILAYES LADRIYESO<br>
+                Dirección Editorial: SuperBel Editions - Maribel de la<br>
+                C/ La Plata, 12 - Viguera (La Rioja) · www.adolmainversiones.es<br>
+                © 2026 Adolma Inversión, S.L. Documentación técnica orientativa. Consulte memoria oficial completa.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navegación suave y activa
+        function scrollToSection(index) {
+            const sections = document.querySelectorAll('header, section, footer');
+            if (sections[index]) {
+                sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Observer para animaciones de entrada
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Actualizar dots de navegación al hacer scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('header, section, footer');
+            const scrollPos = window.scrollY + window.innerHeight / 2;
+
+            sections.forEach((section, index) => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const dots = document.querySelectorAll('.nav-dot');
+
+                if (scrollPos >= top && scrollPos < top + height) {
+                    dots.forEach(d => d.classList.remove('active'));
+                    if(dots[index]) dots[index].classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
