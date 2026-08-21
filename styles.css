@@ -10,7 +10,23 @@
   --err: #f87171;
   --radius: 12px;
   --shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --bg-gradient: radial-gradient(1200px 800px at 20% -10%, #1a2450 0%, var(--bg) 60%);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f4f6fb;
+    --bg-elev: #ffffff;
+    --border: #d9deec;
+    --text: #12172b;
+    --muted: #5a6484;
+    --accent: #0369a1;
+    --ok: #16a34a;
+    --warn: #d97706;
+    --err: #dc2626;
+    --shadow: 0 6px 24px rgba(60, 80, 140, 0.08);
+    --bg-gradient: radial-gradient(1200px 800px at 20% -10%, #e8edff 0%, var(--bg) 60%);
+  }
 }
 
 * { box-sizing: border-box; }
@@ -18,8 +34,9 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(1200px 800px at 20% -10%, #1a2450 0%, var(--bg) 60%);
+  background: var(--bg-gradient);
   color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 .monitor {
@@ -64,11 +81,18 @@ body {
   height: 10px;
   border-radius: 50%;
   background: var(--ok);
-  box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--ok) 60%, transparent);
 }
 
-.core-status[data-state="degraded"] .core-status__dot { background: var(--warn); }
-.core-status[data-state="offline"] .core-status__dot { background: var(--err); }
+.core-status[data-state="degraded"] .core-status__dot {
+  background: var(--warn);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--warn) 60%, transparent);
+}
+
+.core-status[data-state="offline"] .core-status__dot {
+  background: var(--err);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--err) 60%, transparent);
+}
 
 .panel {
   background: var(--bg-elev);
@@ -104,11 +128,16 @@ body {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.02);
+  background: color-mix(in srgb, var(--bg-elev) 92%, var(--text) 3%);
   border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
   border-radius: 10px;
   padding: 0.85rem 1rem;
 }
+
+.card[data-status="ok"] { border-left-color: var(--ok); }
+.card[data-status="warn"] { border-left-color: var(--warn); }
+.card[data-status="err"] { border-left-color: var(--err); }
 
 .card__title {
   margin: 0 0 0.25rem;
