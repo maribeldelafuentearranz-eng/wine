@@ -77,10 +77,24 @@ function renderCore() {
   if (label) label.textContent = CORE_LABELS[state.core] || state.core;
 }
 
+function formatTime(d) {
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
+
+function renderMeta(id, count, singular, plural) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const noun = count === 1 ? singular : plural;
+  el.textContent = `${count} ${noun} · updated ${formatTime(new Date())}`;
+}
+
 function render() {
   renderCore();
   renderList("specialists", state.specialists, specialistCard, "No specialists generated yet.");
   renderList("laws", state.laws, lawCard, "No protocols validated yet.");
+  renderMeta("specialists-meta", state.specialists.size, "specialist", "specialists");
+  renderMeta("laws-meta", state.laws.size, "protocol", "protocols");
 }
 
 window.NeuralMonitor = {

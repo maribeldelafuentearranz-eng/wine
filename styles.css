@@ -103,12 +103,27 @@ body {
   box-shadow: var(--shadow);
 }
 
+.panel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
 .panel h2 {
-  margin: 0 0 1rem;
+  margin: 0;
   font-size: 1.05rem;
   color: var(--accent);
   letter-spacing: 0.03em;
   text-transform: uppercase;
+}
+
+.panel__meta {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .card-grid {

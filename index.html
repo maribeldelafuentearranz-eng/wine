@@ -23,14 +23,20 @@
     </header>
 
     <section class="panel" aria-labelledby="specialists-heading">
-      <h2 id="specialists-heading">Active Neural Specialists</h2>
+      <div class="panel__header">
+        <h2 id="specialists-heading">Active Neural Specialists</h2>
+        <span class="panel__meta" id="specialists-meta" aria-live="polite"></span>
+      </div>
       <ul id="specialists" class="card-grid" aria-live="polite">
         <li class="empty-state">No specialists generated yet.</li>
       </ul>
     </section>
 
     <section class="panel" aria-labelledby="laws-heading">
-      <h2 id="laws-heading">Validated Protocols (Laws)</h2>
+      <div class="panel__header">
+        <h2 id="laws-heading">Validated Protocols (Laws)</h2>
+        <span class="panel__meta" id="laws-meta" aria-live="polite"></span>
+      </div>
       <ul id="laws" class="card-grid" aria-live="polite">
         <li class="empty-state">No protocols validated yet.</li>
       </ul>
