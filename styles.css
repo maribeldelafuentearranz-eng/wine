@@ -1,0 +1,121 @@
+:root {
+  --bg: #0b1020;
+  --bg-elev: #131a33;
+  --border: #223055;
+  --text: #e6ecff;
+  --muted: #8b96b7;
+  --accent: #6ee7ff;
+  --ok: #4ade80;
+  --warn: #fbbf24;
+  --err: #f87171;
+  --radius: 12px;
+  --shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(1200px 800px at 20% -10%, #1a2450 0%, var(--bg) 60%);
+  color: var(--text);
+}
+
+.monitor {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.monitor__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.monitor__header h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  letter-spacing: 0.01em;
+}
+
+.monitor__subtitle {
+  margin: 0;
+  color: var(--muted);
+}
+
+.core-status {
+  margin-top: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  width: max-content;
+  font-size: 0.9rem;
+}
+
+.core-status__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
+}
+
+.core-status[data-state="degraded"] .core-status__dot { background: var(--warn); }
+.core-status[data-state="offline"] .core-status__dot { background: var(--err); }
+
+.panel {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+.panel h2 {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  color: var(--accent);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.card-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-style: italic;
+  padding: 0.5rem 0;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+}
+
+.card__title {
+  margin: 0 0 0.25rem;
+  font-size: 0.95rem;
+}
+
+.card__meta {
+  color: var(--muted);
+  font-size: 0.8rem;
+}

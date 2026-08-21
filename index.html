@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Neural Intelligence Monitor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="monitor">
+    <header class="monitor__header">
+      <h1>Neural Intelligence Monitor</h1>
+      <p class="monitor__subtitle">
+        Real-time status of specialized agents and cognitive laws.
+      </p>
+      <div class="core-status" data-state="synchronized">
+        <span class="core-status__dot" aria-hidden="true"></span>
+        <span class="core-status__label">Core Synchronized</span>
+      </div>
+    </header>
+
+    <section class="panel" aria-labelledby="specialists-heading">
+      <h2 id="specialists-heading">Active Neural Specialists</h2>
+      <ul id="specialists" class="card-grid" aria-live="polite">
+        <li class="empty-state">No specialists generated yet.</li>
+      </ul>
+    </section>
+
+    <section class="panel" aria-labelledby="laws-heading">
+      <h2 id="laws-heading">Validated Protocols (Laws)</h2>
+      <ul id="laws" class="card-grid" aria-live="polite">
+        <li class="empty-state">No protocols validated yet.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="monitor.js"></script>
+</body>
+</html>
